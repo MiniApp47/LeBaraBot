@@ -118,6 +118,7 @@
             padding: 30px;
             border-radius: 20px;
             border: 1px solid #D6AE63ba;
+                width: 50vw;
         }
 
         #page-loader img {
@@ -243,20 +244,23 @@
             display: block;
         }
 
-        .cart-button .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #D0A24A;
-            color: white;
-            border-radius: 50%;
-            font-size: 0.7rem;
-            width: 18px;
-            height: 18px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: 700;
+        #nav-cart .cart-icon {
+            margin-bottom: 5px;
+        }
+
+        #nav-cart .cart-count {
+              border-radius: 25%;
+    min-width: 20px;
+    height: 20px;
+    margin-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: 1rem;
+    line-height: 20px;
+    font-weight: 800;
+    font-family: 'Roboto', sans-serif;
+    background: wheat;
         }
 
         #page-home .filters {
@@ -420,6 +424,7 @@
         }
 
         .nav-item {
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -455,7 +460,7 @@
 
         /* DETAILS PRODUIT (Optimisé & Fusionné) */
         #page-product .product-details {
-            background: rgba(20, 35, 27, 0.88) !important;
+                background: rgb(68 64 61) !important;
             backdrop-filter: blur(10px) !important;
             -webkit-backdrop-filter: blur(10px) !important;
             border-radius: 20px !important;
@@ -1201,12 +1206,6 @@
         </div>
         <div class="home-header">
             <img src="LogoBara.png" alt="Logo" class="home-logo">
-            <button class="cart-button" id="home-cart-button">
-                <svg width="20" height="20">
-                    <use href="#icon-cart" />
-                </svg>
-                <span class="cart-count">0</span>
-            </button>
         </div>
 
         <div class="filters">
@@ -1385,6 +1384,13 @@
             </svg>
             <p style="
             margin: inherit;"> LINKS </p>
+        </button>
+        <button id="nav-cart" data-page="page-cart" class="nav-item">
+            <svg class="cart-icon" width="20" height="20">
+                <use href="#icon-cart" />
+            </svg>
+            <span class="cart-count">0</span>
+            <p style="margin: inherit;"> PANIER </p>
         </button>
        <!--  <button id="nav-avis" data-page="page-avis" class="nav-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

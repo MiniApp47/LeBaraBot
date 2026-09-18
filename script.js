@@ -989,24 +989,27 @@ document.addEventListener('DOMContentLoaded', function () {
         const homeNav = document.getElementById('nav-menu');
         const infoNav = document.getElementById('nav-info'); // On ajoute l'info
         const contactNav = document.getElementById('nav-contact');
+        const cartNav = document.getElementById('nav-cart');
         const avisNav = document.getElementById('nav-avis'); // <-- AJOUT ICI
 
         // On reset tout
-        homeNav.classList.remove('active');
-        infoNav.classList.remove('active');
-        contactNav.classList.remove('active');
+        if (homeNav) homeNav.classList.remove('active');
+        if (infoNav) infoNav.classList.remove('active');
+        if (contactNav) contactNav.classList.remove('active');
+        if (cartNav) cartNav.classList.remove('active');
         if (avisNav) avisNav.classList.remove('active'); // <-- AJOUT ICI
 
         // On active le bon
         if (pageId === 'page-contact') {
-            contactNav.classList.add('active');
+            if (contactNav) contactNav.classList.add('active');
         } else if (pageId === 'page-info') {
-            infoNav.classList.add('active');
-        } else if (pageId === 'page-avis') { // <-- LA NOUVELLE CONDITION
+            if (infoNav) infoNav.classList.add('active');
+        } else if (pageId === 'page-cart' || pageId === 'page-confirmation') {
+            if (cartNav) cartNav.classList.add('active');
+        } else if (pageId === 'page-avis') {
             if (avisNav) avisNav.classList.add('active');
-        }else {
-            // Pour page-home, page-produit, panier, etc.
-            homeNav.classList.add('active');
+        } else {
+            if (homeNav) homeNav.classList.add('active');
         }
     }
 
@@ -1722,14 +1725,29 @@ function renderProductListSimple(categoryId) {
         `).join('');
     }
 
-    // Met à jour le compteur du panier (inchangé)
+    // Met à jour le bouton PANIER :
+    // panier vide = icône panier
+    // panier rempli = nombre total d'articles à la place de l'icône
     function updateCartCount() {
         const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-        const cartCountElements = document.querySelectorAll('.cart-count');
-        cartCountElements.forEach(el => {
-            el.innerText = count;
-            el.style.display = count > 0 ? 'flex' : 'none';
-        });
+
+        const navCart = document.getElementById('nav-cart');
+        if (!navCart) return;
+
+        const cartIcon = navCart.querySelector('.cart-icon');
+        const cartCount = navCart.querySelector('.cart-count');
+
+        if (cartCount) {
+            cartCount.innerText = count;
+
+            if (count > 0) {
+                cartCount.style.display = 'flex';
+                if (cartIcon) cartIcon.style.display = 'none';
+            } else {
+                cartCount.style.display = 'none';
+                if (cartIcon) cartIcon.style.display = '';
+            }
+        }
     }
 
   // --- MODIFIÉ : populateFilters ---
@@ -1993,6 +2011,10 @@ function renderProductListSimple(categoryId) {
                 renderContactPage();
             }
 
+            if (pageId === 'page-cart') {
+                renderCart();
+            }
+
             if (pageId === 'page-home') {
                 currentView = 'categories';
                 currentCategoryId = null;
@@ -2202,12 +2224,6 @@ function renderProductListSimple(categoryId) {
         if (target.closest('.back-button')) {
             showPage('page-home');
             // La gestion des classes 'active' est maintenant dans showPage
-        }
-
-        // Clic sur le bouton du panier
-        if (target.closest('#home-cart-button')) {
-            renderCart();
-            showPage('page-cart');
         }
 
         // Clic sur "Commander"
