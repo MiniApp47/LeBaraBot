@@ -127,19 +127,22 @@ document.addEventListener('DOMContentLoaded', function () {
                     badgeText: '',
                     products: [
                          {
-                            id: 'Mousseux',
+                            id: '🇲🇦TASTY MOUSSE🇲🇦',
                             flag: '🇪🇸',
-                            name: 'Mousseux 🧼',
-                            farm: '🧤 STICKY FINGERS 🧤',
+                            name: '🇲🇦TASTY MOUSSE🇲🇦',
+                            farm: 'NoFarm 🧤',
                             promoEligible: true,
                             type: 'Hash',
-                            image: 'ProductST.jpg',
-                            video: 'VideoST.mp4',
-                            description: '🔥 Mousseux STICKY FINGERS 🔥 ',
+                            image: 'ProductTM.jpg',
+                            video: '',
+                            description: '',
                             tarifs: [
-                                { weight: '25g', price: 90.00 },
-                                { weight: '50g', price: 160.00 },
-                                { weight: '100g', price: 280.00 },
+                                { weight: '10g', price: 50.00 },
+                                { weight: '25g', price: 100.00 },
+                                { weight: '50g', price: 170.00 },
+                                { weight: '100g', price: 300.00 },
+                                { weight: '500g', price: 1250.00 },
+                                { weight: '1Kg', price: 2250.00 },
                             ]
                         },
                     ]
@@ -153,6 +156,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     image: '',
                     badgeText: '',
                     products: [
+                        {
+                            id: ' BLUE LEMON 🍋💙',
+                            flag: '🇨🇭',
+                            name: 'BLUE LEMON 🍋💙',
+                            farm: '🇨🇭 SWISS FARMS 🇨🇭',
+                            promoEligible: true,
+                            type: 'Filtrer',
+                            image: 'ProductBL.jpg',
+                            video: 'VideoBL.mp4',
+                            description: '🇨🇭 NOUVEAUTÉ SWISS FARMS 🇨🇭\n Découvrez le 150/73u BLUE LEMON 🍋💙 \n Curée avant remise 🧑‍🍳🤝 \n une qualité d’exception pour les connaisseurs 🌿💎\n\n ✅ Pureté et puissance\n ✅ Raffinement ultime\n ✅ Saveur incomparable\n\n ⚡ Exclusivité SWISS FARMS – Réservez le vôtre avant rupture !\n 📩 Commande rapide et simple, pour les amateurs de qualité premium.',
+                            tarifs: [
+                                { weight: '5g', price: 60.00 },
+                                { weight: '10g', price: 90.00 },
+                                { weight: '25g', price: 180.00 },
+                                { weight: '50g', price: 300.00 },
+                                { weight: '100g', price: 550.00 },
+                            ]
+                        },
                        /*  {
                             id: 'Strawberry Colato 🍓',
                             flag: '💎',
@@ -626,6 +647,24 @@ document.addEventListener('DOMContentLoaded', function () {
                     image: '',
                     badgeText: '',
                     products: [
+                        {
+                            id: 'CHERRY JUICE 🍒',
+                            flag: '🇺🇸',
+                            name: 'CHERRY JUICE 🍒',
+                            farm: '🇺🇸 NO FARM',
+                            promoEligible: false,
+                            type: 'Weed',
+                            image: 'ProductCJ.jpg',
+                            video: 'VideoCJ.mp4',
+                            description: '🚨 NOUVEAUTÉ – CALI US 🚨 \n Certifié californienne 100% 🇺🇸🍭🍯',
+                            tarifs: [
+                                { weight: '4g', price: 50.00 },
+                                { weight: '10g', price: 100.00 },
+                                { weight: '25g', price: 200.00 },
+                                { weight: '50g', price: 350.00 },
+                                { weight: '100g', price: 650.00 },
+                            ]
+                        }
                         /* {
                             id: 'CHERRY JUICE 🍒',
                             flag: '🇺🇸',
@@ -1356,7 +1395,7 @@ function renderProductListSimple(categoryId) {
             <div class="info">
                 <div class="name">${product.name} ${flagHTML}</div>
                 <div class="farm">${product.farm}</div> 
-                <div class="price">${product.tarifs[0].price.toFixed(2)}€</div>
+                <div class="price">${product.tarifs[0].price.toFixed(2)}CHF</div>
             </div>
         `;
         productListContainer.appendChild(card);
@@ -1411,7 +1450,7 @@ function renderProductListSimple(categoryId) {
                 <div class="info">
                     <div class="name">${product.name} ${flagHTML}</div>
                     <div class="farm">${product.farm}</div>
-                    <div class="price">${product.tarifs[0].price.toFixed(2)}€</div>
+                    <div class="price">${product.tarifs[0].price.toFixed(2)}CHF</div>
                 </div>
             `;
             productListContainer.appendChild(card);
@@ -1505,7 +1544,7 @@ function renderProductListSimple(categoryId) {
             <div class="tarif-item">
                 <div class="box-tarif">
                     <div class="tarif-wieght">${tarif.weight}</div>
-                    <div class="tarif-price">${tarif.price.toFixed(2)}€</div>
+                    <div class="tarif-price">${tarif.price.toFixed(2)}CHF</div>
                 </div>
                 <button class="add-to-cart-btn" data-product-id="${product.id}" data-weight="${tarif.weight}" data-price="${tarif.price}">
                     <svg width="20" height="20"><use href="#icon-cart"/></svg>
@@ -1579,7 +1618,7 @@ function renderProductListSimple(categoryId) {
         const cartContainer = document.getElementById('cart-items-container');
         if (cart.length === 0) {
             cartContainer.innerHTML = '<p>Votre panier est vide.</p>';
-            document.getElementById('cart-total-price').innerText = '0.00€';
+            document.getElementById('cart-total-price').innerText = '0.00CHF';
             updateCartCount();
             return;
         }
@@ -1590,8 +1629,8 @@ function renderProductListSimple(categoryId) {
                 
                 <div class="item-details">
                     <div class="name">${item.name}</div>
-                    <div class="gram" >${item.weight} - ${item.unitPrice.toFixed(2)}€</div>
-                    <div class="price">${item.totalPrice.toFixed(2)}€</div>
+                    <div class="gram" >${item.weight} - ${item.unitPrice.toFixed(2)}CHF</div>
+                    <div class="price">${item.totalPrice.toFixed(2)}CHF</div>
                 </div>
                 <div class="quantity-selector">
                     <button class="quantity-btn" data-action="decrease" data-id="${item.id}">-</button>
@@ -1602,7 +1641,7 @@ function renderProductListSimple(categoryId) {
         `).join('');
 
         const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
-        document.getElementById('cart-total-price').innerText = `${total.toFixed(2)}€`;
+        document.getElementById('cart-total-price').innerText = `${total.toFixed(2)}CHF`;
         updateCartCount();
     }
 
@@ -1639,7 +1678,7 @@ function renderProductListSimple(categoryId) {
 
     // Mise à jour du résumé
     document.getElementById('confirmation-items-count').innerText = `${totalItems} article${totalItems > 1 ? 's' : ''}`;
-    document.getElementById('confirmation-total-price').innerText = `${totalPrice.toFixed(2)}€`;
+    document.getElementById('confirmation-total-price').innerText = `${totalPrice.toFixed(2)}CHF`;
 
     // Liste des articles
     const itemsList = document.getElementById('confirmation-items-list');
@@ -1650,7 +1689,7 @@ function renderProductListSimple(categoryId) {
             <div class="item-details">
                 <div>${index + 1}. ${item.name}</div>
                 <div>Quantité: ${item.quantity}x ${item.weight}</div>
-                <div>Prix unitaire: ${item.unitPrice.toFixed(2)}€</div>
+                <div>Prix unitaire: ${item.unitPrice.toFixed(2)}CHF</div>
             </div>
         </div>
     `).join('');
@@ -1678,21 +1717,21 @@ function renderProductListSimple(categoryId) {
     let summaryHTML = `
         <div class="summary-line">
             <span>Sous-total:</span>
-            <span>${subTotal.toFixed(2)}€</span>
+            <span>${subTotal.toFixed(2)}CHF</span>
         </div>
     `;
     if (discount > 0) {
         summaryHTML += `
         <div class="summary-line discount">
             <span>Réduction:</span>
-            <span>-${discount.toFixed(2)}€</span>
+            <span>-${discount.toFixed(2)}CHF</span>
         </div>
         `;
     }
     summaryHTML += `
         <div class="summary-line total">
             <span>💰 Total final:</span>
-            <span>${totalPrice.toFixed(2)}€</span>
+            <span>${totalPrice.toFixed(2)}CHF</span>
         </div>
     `;
     summaryContainer.innerHTML = summaryHTML;
@@ -1911,20 +1950,20 @@ function renderProductListSimple(categoryId) {
         message += `• Quantité: ${item.quantity}x ${item.weight}\n`;
         
         // Ligne 3 : Prix unitaire
-        message += `• Prix unitaire: ${item.unitPrice.toFixed(2)}€\n`;
+        message += `• Prix unitaire: ${item.unitPrice.toFixed(2)}CHF\n`;
         
         // Ligne 4 : Total de la ligne
-        message += `• Total: ${item.totalPrice.toFixed(2)}€\n\n`;
+        message += `• Total: ${item.totalPrice.toFixed(2)}CHF\n\n`;
     });
 
     // Résumé financier
     // Si promo, on affiche le détail, sinon juste le total
     if (discount > 0) {
-        message += `Sous-total: ${subTotal.toFixed(2)}€\n`;
-        message += `Réduction (${appliedPromo}): -${discount.toFixed(2)}€\n`;
-        message += `\n*💰 TOTAL: ${totalPrice.toFixed(2)}€*\n`;
+        message += `Sous-total: ${subTotal.toFixed(2)}CHF\n`;
+        message += `Réduction (${appliedPromo}): -${discount.toFixed(2)}CHF\n`;
+        message += `\n*💰 TOTAL: ${totalPrice.toFixed(2)}CHF*\n`;
     } else {
-        message += `*💰 TOTAL: ${totalPrice.toFixed(2)}€*\n`;
+        message += `*💰 TOTAL: ${totalPrice.toFixed(2)}CHF*\n`;
     }
 
     // Pied de page
