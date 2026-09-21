@@ -137,12 +137,12 @@ document.addEventListener('DOMContentLoaded', function () {
                             video: '',
                             description: '',
                             tarifs: [
-                                { weight: '10g', price: 50.00 },
-                                { weight: '25g', price: 100.00 },
-                                { weight: '50g', price: 170.00 },
-                                { weight: '100g', price: 300.00 },
-                                { weight: '500g', price: 1250.00 },
-                                { weight: '1Kg', price: 2250.00 },
+                                { weight: '10g', price: 50 },
+                                { weight: '25g', price: 100 },
+                                { weight: '50g', price: 170 },
+                                { weight: '100g', price: 300 },
+                                { weight: '500g', price: 1250 },
+                                { weight: '1Kg', price: 2250 },
                             ]
                         },
                     ]
@@ -1395,7 +1395,7 @@ function renderProductListSimple(categoryId) {
             <div class="info">
                 <div class="name">${product.name} ${flagHTML}</div>
                 <div class="farm">${product.farm}</div> 
-                <div class="price">${product.tarifs[0].price.toFixed(2)}CHF</div>
+                <div class="price">${product.tarifs[0].price.toFixed(0)}CHF</div>
             </div>
         `;
         productListContainer.appendChild(card);
@@ -1450,7 +1450,7 @@ function renderProductListSimple(categoryId) {
                 <div class="info">
                     <div class="name">${product.name} ${flagHTML}</div>
                     <div class="farm">${product.farm}</div>
-                    <div class="price">${product.tarifs[0].price.toFixed(2)}CHF</div>
+                    <div class="price">${product.tarifs[0].price.toFixed(0)}CHF</div>
                 </div>
             `;
             productListContainer.appendChild(card);
@@ -1544,7 +1544,7 @@ function renderProductListSimple(categoryId) {
             <div class="tarif-item">
                 <div class="box-tarif">
                     <div class="tarif-wieght">${tarif.weight}</div>
-                    <div class="tarif-price">${tarif.price.toFixed(2)}CHF</div>
+                    <div class="tarif-price">${tarif.price.toFixed(0)}CHF</div>
                 </div>
                 <button class="add-to-cart-btn" data-product-id="${product.id}" data-weight="${tarif.weight}" data-price="${tarif.price}">
                     <svg width="20" height="20"><use href="#icon-cart"/></svg>
@@ -1629,8 +1629,8 @@ function renderProductListSimple(categoryId) {
                 
                 <div class="item-details">
                     <div class="name">${item.name}</div>
-                    <div class="gram" >${item.weight} - ${item.unitPrice.toFixed(2)}CHF</div>
-                    <div class="price">${item.totalPrice.toFixed(2)}CHF</div>
+                    <div class="gram" >${item.weight} - ${item.unitPrice.toFixed(0)}CHF</div>
+                    <div class="price">${item.totalPrice.toFixed(0)}CHF</div>
                 </div>
                 <div class="quantity-selector">
                     <button class="quantity-btn" data-action="decrease" data-id="${item.id}">-</button>
@@ -1641,7 +1641,7 @@ function renderProductListSimple(categoryId) {
         `).join('');
 
         const total = cart.reduce((sum, item) => sum + item.totalPrice, 0);
-        document.getElementById('cart-total-price').innerText = `${total.toFixed(2)}CHF`;
+        document.getElementById('cart-total-price').innerText = `${total.toFixed(0)}CHF`;
         updateCartCount();
     }
 
@@ -1678,7 +1678,7 @@ function renderProductListSimple(categoryId) {
 
     // Mise à jour du résumé
     document.getElementById('confirmation-items-count').innerText = `${totalItems} article${totalItems > 1 ? 's' : ''}`;
-    document.getElementById('confirmation-total-price').innerText = `${totalPrice.toFixed(2)}CHF`;
+    document.getElementById('confirmation-total-price').innerText = `${totalPrice.toFixed(0)}CHF`;
 
     // Liste des articles
     const itemsList = document.getElementById('confirmation-items-list');
@@ -1689,7 +1689,7 @@ function renderProductListSimple(categoryId) {
             <div class="item-details">
                 <div>${index + 1}. ${item.name}</div>
                 <div>Quantité: ${item.quantity}x ${item.weight}</div>
-                <div>Prix unitaire: ${item.unitPrice.toFixed(2)}CHF</div>
+                <div>Prix unitaire: ${item.unitPrice.toFixed(0)}CHF</div>
             </div>
         </div>
     `).join('');
@@ -1717,21 +1717,21 @@ function renderProductListSimple(categoryId) {
     let summaryHTML = `
         <div class="summary-line">
             <span>Sous-total:</span>
-            <span>${subTotal.toFixed(2)}CHF</span>
+            <span>${subTotal.toFixed(0)}CHF</span>
         </div>
     `;
     if (discount > 0) {
         summaryHTML += `
         <div class="summary-line discount">
             <span>Réduction:</span>
-            <span>-${discount.toFixed(2)}CHF</span>
+            <span>-${discount.toFixed(0)}CHF</span>
         </div>
         `;
     }
     summaryHTML += `
         <div class="summary-line total">
             <span>💰 Total final:</span>
-            <span>${totalPrice.toFixed(2)}CHF</span>
+            <span>${totalPrice.toFixed(0)}CHF</span>
         </div>
     `;
     summaryContainer.innerHTML = summaryHTML;
@@ -1950,20 +1950,20 @@ function renderProductListSimple(categoryId) {
         message += `• Quantité: ${item.quantity}x ${item.weight}\n`;
         
         // Ligne 3 : Prix unitaire
-        message += `• Prix unitaire: ${item.unitPrice.toFixed(2)}CHF\n`;
+        message += `• Prix unitaire: ${item.unitPrice.toFixed(0)}CHF\n`;
         
         // Ligne 4 : Total de la ligne
-        message += `• Total: ${item.totalPrice.toFixed(2)}CHF\n\n`;
+        message += `• Total: ${item.totalPrice.toFixed(0)}CHF\n\n`;
     });
 
     // Résumé financier
     // Si promo, on affiche le détail, sinon juste le total
     if (discount > 0) {
-        message += `Sous-total: ${subTotal.toFixed(2)}CHF\n`;
-        message += `Réduction (${appliedPromo}): -${discount.toFixed(2)}CHF\n`;
-        message += `\n*💰 TOTAL: ${totalPrice.toFixed(2)}CHF*\n`;
+        message += `Sous-total: ${subTotal.toFixed(0)}CHF\n`;
+        message += `Réduction (${appliedPromo}): -${discount.toFixed(0)}CHF\n`;
+        message += `\n*💰 TOTAL: ${totalPrice.toFixed(0)}CHF*\n`;
     } else {
-        message += `*💰 TOTAL: ${totalPrice.toFixed(2)}CHF*\n`;
+        message += `*💰 TOTAL: ${totalPrice.toFixed(0)}CHF*\n`;
     }
 
     // Pied de page
